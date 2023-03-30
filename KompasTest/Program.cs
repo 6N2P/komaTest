@@ -8,6 +8,7 @@ using Kompas6API5;
 using Kompas6Constants;
 using Kompas6Constants3D;
 using KAPITypes;
+using KompasAPI7;
 using System.Drawing;
 using System.Runtime.InteropServices;
 
@@ -291,6 +292,39 @@ namespace KompasTest
             {
                 public double a, b;
                 public int c, d;
+            }
+            //Получить редактировать свойства модели
+            public void GetSetProperty()
+            {
+                IApplication application = (IApplication)Marshal.GetActiveObject("KOMPAS.Application.7");
+                IKompasDocument3D document3D = (IKompasDocument3D)application.ActiveDocument;
+                IPart7 part = document3D.TopPart;
+                //получаю свойства докумнта
+                IPropertyMng propertyMng = (IPropertyMng)application;
+
+                //создаю свойства
+                IProperty property = propertyMng.AddProperty(null, null);
+                property.Name = "Новое свойство";
+                property.Update();
+
+                //получаю свойства докумнта
+                var properties = propertyMng.GetProperties(document3D);
+                foreach (IProperty item in properties)
+                {
+                    if(item.Name == "Новое свойство")
+                    {
+                        dynamic info;
+                        bool sourse;
+                        IPropertyKeeper propertyKeeper = (IPropertyKeeper)item;
+                        propertyKeeper.SetPropertyValue((_Property)item, 123, false);
+                        item.Update();
+
+                        //Получаю все свойства модели
+                        propertyKeeper.GetPropertyValue((_Property)item, out info,false, out sourse);
+                        Console.WriteLine(info);
+                    }
+                }
+
             }
         }
     }
