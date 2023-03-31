@@ -37,23 +37,23 @@
       <HintPath>C:\Program Files\ASCON\KOMPAS-3D v20\SDK\Samples\Carp\Common\KAPITypes.dll</HintPath>
     </Reference>
     <Reference Include="Kompas6API5">
-      <HintPath>C:\Program Files\ASCON\KOMPAS-3D v20\SDK\Samples\Carp\Common\Kompas6API5.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\ASCON\KOMPAS-3D v20\SDK\Samples\C#\Common\Kompas6API5.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="Kompas6Constants">
-      <HintPath>C:\Program Files\ASCON\KOMPAS-3D v20\SDK\Samples\Carp\Common\Kompas6Constants.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\ASCON\KOMPAS-3D v20\SDK\Samples\C#\Common\Kompas6Constants.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="Kompas6Constants3D">
-      <HintPath>C:\Program Files\ASCON\KOMPAS-3D v20\SDK\Samples\Carp\Common\Kompas6Constants3D.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\ASCON\KOMPAS-3D v20\SDK\Samples\C#\Common\Kompas6Constants3D.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="KompasAPI7">
-      <HintPath>C:\Program Files\ASCON\KOMPAS-3D v20\SDK\Samples\Carp\Common\KompasAPI7.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\ASCON\KOMPAS-3D v20\SDK\Samples\C#\Common\KompasAPI7.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="KompasLibrary">
-      <HintPath>C:\Program Files\ASCON\KOMPAS-3D v20\SDK\Samples\Carp\Common\KompasLibrary.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\ASCON\KOMPAS-3D v20\SDK\Samples\C#\Common\KompasLibrary.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="System" />

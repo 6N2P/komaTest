@@ -326,6 +326,40 @@ namespace KompasTest
                 }
 
             }
+
+            //Проход по всем сборкам и подсборкам
+            public void GetAssemblyAndParts ()
+            {
+                IApplication application = (IApplication)Marshal.GetActiveObject("Kompas.Application.7");
+                IKompasDocument3D document3D = (IKompasDocument3D)application.ActiveDocument;
+                //получаю сборку
+                IPart7 part = document3D.TopPart;
+
+                List<IPart7> parts = new List<IPart7> ();
+
+                Recursion recursion = new Recursion ();
+                recursion.GetDetails(part,parts);
+
+                foreach (IPart7 item in parts)
+                {
+                    Console.WriteLine(item.Marking + " - " + item.Name);
+                }
+            }
+            /// <summary>
+            /// Класс для рекурсивного метода создания списка деталей всех сборок
+            /// </summary>
+            class Recursion
+            {
+                public void GetDetails (IPart7 part, List<IPart7>parts)
+                {
+                    parts.Add(part);
+                    foreach(IPart7 item in part.Parts)
+                    {
+                        if (item.Detail == true) parts.Add(item);
+                        if (item.Detail == false) GetDetails(item, parts);
+                    }
+                }
+            }
         }
     }
 }
