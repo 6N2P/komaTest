@@ -24,9 +24,10 @@ namespace KompasTest
             string flag;
             while (!exit)
             {
-                 ko.UseEntityCollection();
+                //  ko.UseEntityCollection();
                 // ko.GetSetPartName();
-             //   ko.GetSetUserParamComponent();
+                //   ko.GetSetUserParamComponent();
+                ko.GetAssemblyAndPartsOLD();
 
                 Console.WriteLine("Для выхода нажать 1");
                 flag=Console.ReadLine();
@@ -307,6 +308,7 @@ namespace KompasTest
                 property.Name = "Новое свойство";
                 property.Update();
 
+                
                 //получаю свойства докумнта
                 var properties = propertyMng.GetProperties(document3D);
                 foreach (IProperty item in properties)
@@ -326,12 +328,56 @@ namespace KompasTest
                 }
 
             }
+            //Поход по всем сборкам на aplication 5
+            public void GetAssemblyAndPartsOLD()
+            {
+                kompas = (KompasObject)Marshal.GetActiveObject("KOMPAS.Application.5");
+                ksDocument3D doc = (ksDocument3D)kompas.ActiveDocument3D(); // привязываемся к активному документу
 
+
+                if (doc != null)
+                {
+                 
+                    IApplication application = (IApplication)Marshal.GetActiveObject("Kompas.Application.7");
+                    IKompasDocument3D document3D = (IKompasDocument3D)application.ActiveDocument;
+
+                    IPropertyMng propertyMng = (IPropertyMng)application;
+
+                    //получаю сборку
+                    IPart7 part = document3D.TopPart;
+                    
+                    IFeature7 f7 = part as IFeature7;
+                    if (f7.ResultBodies is object[])
+                        foreach (IBody7 body in f7.ResultBodies)
+                        {
+                            if (body is IBody7)
+                            {
+                                var properties = propertyMng.GetProperties(document3D);
+                                foreach (IProperty item in properties)
+                                {
+                                    if (item.Name == "Масса")
+                                    {
+                                        dynamic info;
+                                        bool sourse;
+                                        IPropertyKeeper propertyKeeper = (IPropertyKeeper)body;
+
+                                        propertyKeeper.GetPropertyValue((_Property)item, out info, false, out sourse);
+
+                                        Console.WriteLine(info);
+                                    }
+                                }
+                            }
+                        }
+
+                }
+            }
+          
             //Проход по всем сборкам и подсборкам
             public void GetAssemblyAndParts ()
             {
                 IApplication application = (IApplication)Marshal.GetActiveObject("Kompas.Application.7");
                 IKompasDocument3D document3D = (IKompasDocument3D)application.ActiveDocument;
+               
                 //получаю сборку
                 IPart7 part = document3D.TopPart;
 
@@ -352,11 +398,15 @@ namespace KompasTest
             {
                 public void GetDetails (IPart7 part, List<IPart7>parts)
                 {
+
                     parts.Add(part);
                     foreach(IPart7 item in part.Parts)
                     {
                         if (item.Detail == true) parts.Add(item);
                         if (item.Detail == false) GetDetails(item, parts);
+
+                     //   ksBodyParts body=item.GetBodyById(0);
+                       // ksEntity body=(ksEntity)item.getd
                     }
                 }
             }
