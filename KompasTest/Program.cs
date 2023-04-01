@@ -355,6 +355,16 @@ namespace KompasTest
                                 var properties = propertyMng.GetProperties(document3D);
                                 foreach (IProperty item in properties)
                                 {
+                                    if (item.Name == "Позиция")
+                                    {
+                                        dynamic info;
+                                        bool sourse;
+                                        IPropertyKeeper propertyKeeper = (IPropertyKeeper)body;
+
+                                        propertyKeeper.GetPropertyValue((_Property)item, out info, false, out sourse);
+
+                                        Console.WriteLine($"Позиция:{info}");
+                                    }
                                     if (item.Name == "Масса")
                                     {
                                         dynamic info;
@@ -363,7 +373,7 @@ namespace KompasTest
 
                                         propertyKeeper.GetPropertyValue((_Property)item, out info, false, out sourse);
 
-                                        Console.WriteLine(info);
+                                        Console.WriteLine($" Вес:{info}");
                                     }
                                 }
                             }
